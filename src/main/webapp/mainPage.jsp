@@ -59,7 +59,7 @@
                 <div id="label_y">Y:</div>
             </td>
             <td class="table">
-                <input type="text" name="Y" id="Y_field" placeholder="[-3..3] " class="qw">
+                <input type="text" name="Y" id="Y_field" placeholder="[-3..5] " class="qw" maxlength="6">
             </td>
         </tr>
 

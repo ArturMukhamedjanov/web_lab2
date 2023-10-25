@@ -59,7 +59,7 @@ public class ControllerServlet extends HttpServlet {
                 "  </head>" +
                 "<body>" +
                 "<div id = \"error\">Error " + Y + " " + R + "</div>" +
-                "<a href = \"http://localhost:8080/web-jsp\">Go back</a>" +
+                "<a href = \"http://localhost:24754/lab2\">Go back</a>" +
                 "</body></html>";
         writer.write(answer);
         writer.close();

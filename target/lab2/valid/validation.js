@@ -26,18 +26,18 @@ $(".check-values.x input").on('change', function () {
  */
 
 function set_value() {
-
+    inputY.value = inputY.value.replace(",", ".");
     if (!/^-?\d+(\.|,)?\d*$/i.test(inputY.value)) {
         inputY.value = "";
         inputY.style.backgroundColor = "rgba(250, 50, 50, .4)";
         flag1 = true;
     } else {
-        let y = inputY.value.replace(/[,]/, ".");
-        if (y < -3 || y > 3) {
+        let y = inputY.value.replace(",", ".");
+        if (y < -3 || y > 5) {
             flag1 = true;
             inputY.value = "";
             inputY.style.backgroundColor = "rgba(250, 50, 50, .4)";
-        } else if (Number(y.split(".")[0]) >= 3 && Number(y.split(".")[1]) > 0) {
+        } else if (Number(y.split(".")[0]) >= 5 && Number(y.split(".")[1]) > 0) {
             //    error.textContent = "Ошибка: Выход за пределы, введите число в интервале [-5;5]";
             inputY.value = "";
             inputY.style.backgroundColor = "rgba(250, 50, 50, .4)";

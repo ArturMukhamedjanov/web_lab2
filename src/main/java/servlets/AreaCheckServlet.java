@@ -42,11 +42,11 @@ public class AreaCheckServlet extends HttpServlet {
 
 
     public void checkButton(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        double scale = Math.pow(10, 4);
+        double scale = Math.pow(10, 6);
         String res = "";
         Double x = Double.parseDouble(req.getParameter("x"));
-        Double y = Math.ceil(Double.parseDouble(req.getParameter("Y")) * scale) / scale;
-        Double r = Math.ceil(Double.parseDouble(req.getParameter("R")) * scale) / scale;
+        Double y = Double.parseDouble(req.getParameter("Y"));
+        Double r = Math.ceil(Double.parseDouble(req.getParameter("R")));
 
         if(((x==-3) || (x==-2) || (x==-1) || (x==0) || (x==1) || (x==2) || (x==3) || (x==4) || (x==5)) && (y>=-3) &&
                 (y<=5) && (r>=1) && (r<=4)){
@@ -72,7 +72,7 @@ public class AreaCheckServlet extends HttpServlet {
         Double y = Math.ceil(Double.parseDouble(req.getParameter("Y")) * scale) / scale;
         Double r = Math.ceil(Double.parseDouble(req.getParameter("R")) * scale) / scale;
 
-        if((r>=1)&&(r<=4)){
+        if((r>=1)&&(r<=5)){
             if(ifInZone(x,y,r)){
                 res = "True";
                 model.setPoint(new Point(x,y,r,true));
@@ -89,7 +89,7 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     public void drawTable(HttpServletResponse resp, String x, String y, String r, String result) throws IOException {
-
+        String referer = resp.getHeader("Referer");
         PrintWriter writer = resp.getWriter();
         String answer = "<html>\n" +
                 "  <head>\n" +
@@ -133,7 +133,7 @@ public class AreaCheckServlet extends HttpServlet {
                 "            <thead>\n" +
                 "                <tr>\n" +
                 "                    <th colspan=\"2\" class=\"table\">\n" +
-                "                        <div class=\"header-text\"> Checking result: </div>\n" +
+                "                        <div class=\"header-text\"> CChecking result:</div>\n" +
                 "                    </th>\n" +
                 "                </tr>\n" +
                 "            </thead>\n" +
@@ -176,7 +176,7 @@ public class AreaCheckServlet extends HttpServlet {
                 "\n" +
                 "                <tr>\n" +
                 "                    <td class=\"table\">\n" +
-                "                        <a href = \"http://localhost:8080/web-jsp\"> BACK </a>\n" +
+                "                        <a href = \""+referer+"\"> BACK </a>\n" +
                 "                    </td>\n" +
                 "\t\t\t\t\t<td class=\"table\">                       \n" +
                 "                    </td>\n" +
@@ -192,6 +192,7 @@ public class AreaCheckServlet extends HttpServlet {
 
     public void createErrorPage(HttpServletResponse resp, String text) throws IOException {
         PrintWriter writer = resp.getWriter();
+        String referer = resp.getHeader("Referer");
         String answer = "<html>\n" +
                 "  <head>\n" +
                 "    <meta charset=\"utf-8\" /> " +
@@ -199,7 +200,7 @@ public class AreaCheckServlet extends HttpServlet {
                 "  </head>" +
                 "<body>" +
                 "<div id = \"error\">Error " + text + "</div>" +
-                "<a href = \"http://localhost:8080/web-jsp\"> BACK </a>" +
+                "<a href = \"" + referer + "\"> BACK </a>" +
                 "</body></html>";
         writer.write(answer);
         writer.close();
